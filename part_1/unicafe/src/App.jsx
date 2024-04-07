@@ -20,6 +20,15 @@ const App = () => {
     setBad(newValue)
   } 
 
+  const all = good + neutral + bad
+  console.log("all: ", all);
+
+  const average = all === 0 ? 0 : (good * 1 + neutral * 0 + bad * -1) / all;
+  console.log("average: ",average);
+
+  const positive = all === 0 ? 0 : (good *100)/all
+  console.log("average: ", positive);
+
   return (
     <div>
       <h1>give feedback</h1>
@@ -30,6 +39,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {all} </p>
+      <p>average {average}</p> 
+      <p>positive {positive} % </p>
     </div>
   )
 } 
