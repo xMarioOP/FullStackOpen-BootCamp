@@ -1,25 +1,38 @@
 import { useState } from 'react'
 
-const Statistics =  ({good, neutral, bad, all, average, positive}) => {
+const Button = ({onSmashClick, text}) => {
+  console.log("button props : ", onSmashClick, text);
+  return(
+    <button  onClick= {onSmashClick}>{text}</button>
+  )
+}
+
+const StatisticLine = ({text,value}) => {
+  console.log("StatisticLine props: ", text, value);
+  return(
+    <p>{text} {value}</p>
+  )
+}
+
+const Statistics = ({ good, neutral, bad, all, average, positive }) => {
   console.log("Values before", good, neutral, bad, all, average, positive);
   if (good === 0 && neutral === 0 && bad === 0) {
-    return(
+    return (
       <div>
         <h1>statistics</h1>
         <p>No feedback given</p>
-      </div>  
-       
+      </div>
     )
-  }else{
-    return(
+  } else {
+    return (
       <div>
         <h1>statistics</h1>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>all {all} </p>
-        <p>average {average}</p> 
-        <p>positive {positive} % </p>
+        <StatisticLine text="good" value ={good} />
+        <StatisticLine text="neutral" value ={neutral} />
+        <StatisticLine text="bad" value ={bad} />
+        <StatisticLine text="all" value ={all} />
+        <StatisticLine text="average" value ={average} />
+        <StatisticLine text="positive" value ={positive} />
       </div>
     )
   }
@@ -28,41 +41,30 @@ const Statistics =  ({good, neutral, bad, all, average, positive}) => {
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0) 
+  const [bad, setBad] = useState(0)
 
-  const handleGoodClick = (newValue) => () => {
-    console.log("value good before", newValue);
-    setGood(newValue)
-  } 
-
-  const handleNeutralClick = (newValue) => () => {
-    console.log("value neutral before", newValue);
-    setNeutral(newValue)
-  } 
+  const handleGoodClick = () => setGood(good +1)
+  const handleNeutralClick = () => setNeutral(neutral +1)
+  const handleBadClick = () => setBad(bad +1)
   
-  const handleBadClick = (newValue) => () => {
-    console.log("value bad before", newValue);
-    setBad(newValue)
-  } 
-
   const all = good + neutral + bad
   console.log("all: ", all);
 
   const average = all === 0 ? 0 : (good * 1 + neutral * 0 + bad * -1) / all;
-  console.log("average: ",average);
+  console.log("average: ", average);
 
-  const positive = all === 0 ? 0 : (good *100)/all
+  const positive = all === 0 ? 0 : (good * 100) / all
   console.log("average: ", positive);
 
-  return (
+  return ( 
     <div>
       <h1>give feedback</h1>
-      <button onClick={handleGoodClick(good +1 )}>good</button>
-      <button onClick={handleNeutralClick(neutral +1 )}>neutral</button>
-      <button onClick={handleBadClick(bad +1 )}>bad</button>
-      <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positive={positive}  />
+      <Button onSmashClick={handleGoodClick} text="good" />
+      <Button onSmashClick={handleNeutralClick} text="neutral" />
+      <Button onSmashClick={handleBadClick} text="bad" />
+      <Statistics good={good} neutral={neutral} bad={bad} all={all} average={average} positive={positive} />
     </div>
   )
-} 
+}
 
 export default App
