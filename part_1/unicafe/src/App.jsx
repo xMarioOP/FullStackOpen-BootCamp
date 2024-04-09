@@ -10,7 +10,16 @@ const Button = ({onSmashClick, text}) => {
 const StatisticLine = ({text,value}) => {
   console.log("StatisticLine props: ", text, value);
   return(
-    <p>{text} {value}</p>
+    <table style={{ width: '15%' }}>
+    <tbody>
+      <tr>
+        <th style={{ width: '40%', textAlign: 'left' }}>{text}</th>
+        <td></td>
+        <td></td>
+        <td style={{ width: '90%', textAlign: 'center' }}>{value}</td>
+      </tr>
+    </tbody>
+  </table>
   )
 }
 
