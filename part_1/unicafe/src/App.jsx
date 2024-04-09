@@ -32,7 +32,7 @@ const Statistics = ({ good, neutral, bad, all, average, positive }) => {
         <StatisticLine text="bad" value ={bad} />
         <StatisticLine text="all" value ={all} />
         <StatisticLine text="average" value ={average} />
-        <StatisticLine text="positive" value ={positive} />
+        <StatisticLine text="positive" value ={`${positive}%`} />
       </div>
     )
   }
