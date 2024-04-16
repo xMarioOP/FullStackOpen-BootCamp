@@ -9,4 +9,3 @@ const Parts = ({part}) => {
 };
 
 export default Parts;   
-//e

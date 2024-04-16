@@ -14,4 +14,3 @@ const Content = ({parts}) => {
 };
 
 export default Content;
-//e
