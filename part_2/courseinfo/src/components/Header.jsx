@@ -6,4 +6,4 @@ const Header = ({course}) => {
     );
 };
 
-export default Header;
+export default Header
