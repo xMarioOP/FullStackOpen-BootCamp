@@ -2,12 +2,22 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: "Arto Hellas",
-      phone: "040-1234567"
-    }
+    { name: 'Arto Hellas', number: '040-123456', id: 1 },
+    { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
+    { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
+    { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
   const [newName, setNewName] = useState("")
-  const [newPhone, setNewPhone] = useState("")
+  const [newNumber, setNewNumber] = useState("")
+  const [filter, setFilter] = useState("")
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  }
+
+  const personFilter = filter
+  ? persons.filter(person => person.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()))
+  : persons;
 
   const addPerson = (e) => {
     e.preventDefault()
@@ -21,12 +31,13 @@ const App = () => {
 
   const addPersonDatesObject = {
       name: newName,
-      phone: newPhone
+      number: newNumber,
+      id: persons.length + 1
     }
 
     setPersons(persons.concat(addPersonDatesObject))
     setNewName("")
-    setNewPhone("")
+    setNewNumber("")
   }
 
 
@@ -35,16 +46,24 @@ const App = () => {
     setNewName(e.target.value)
   }
 
-  const handlePhoneChange = (e) => {
+  const handleNumberChange = (e) => {
     console.log(e.target.value);
-    setNewPhone(e.target.value)
+    setNewNumber(e.target.value)
   }
 
 
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        filter shown with 
+        <input 
+        value={filter}
+        onChange={handleFilterChange}
+        />
+      </div>
 
+      <h2>Add a new</h2>
       <form onSubmit={addPerson}>
         <div>
           name: 
@@ -56,8 +75,8 @@ const App = () => {
 
         <div>number: 
           <input 
-            value={newPhone}
-            onChange={handlePhoneChange}
+            value={newNumber}
+            onChange={handleNumberChange}
            /></div>
 
         <div>
@@ -68,8 +87,8 @@ const App = () => {
 
       <h2>Numbers</h2>
       {
-        persons.map(person =>
-          <p key={person.name}>{person.name} {person.phone}</p>
+        personFilter.map(person =>
+          <p key={person.id}>{person.name} {person.number}</p>
         )
       }
     </div>
