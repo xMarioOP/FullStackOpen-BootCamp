@@ -24,7 +24,7 @@ const App = () => {
 
     const nameExist = persons.some(person => person.name === newName)
     if (nameExist) {
-      alert(`${newName} is already added to phonebook`)
+      alert(`${newName} is already added to phonebook`);
       return
     }
 
@@ -66,6 +66,7 @@ const App = () => {
       <Persons personFilter={personFilter} />
     </div>
   )
+
 }
 
 export default App
